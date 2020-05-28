@@ -3,6 +3,7 @@ package hhdd.messagesystem.controller;
 import hhdd.messagesystem.bean.FirstLevelComment;
 import hhdd.messagesystem.bean.SecondLevelComment;
 import hhdd.messagesystem.service.CommentService;
+import hhdd.messagesystem.service.impl.CommentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,8 @@ import java.util.Date;
 public class CommentController {
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private CommentServiceImpl commentServiceImpl;
 
     @RequestMapping(value = "/add/first", method = RequestMethod.POST)
     public FirstLevelComment addFirst(FirstLevelComment flc) {
@@ -23,7 +26,7 @@ public class CommentController {
 
         //修复新评论无法显示时间的bug
         flc.setCommentTime(new Date());
-        commentService.addFlcComment(flc);
+        commentServiceImpl.addFlcComment(flc);
         return flc;
     }
 

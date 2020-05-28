@@ -2,6 +2,7 @@ package hhdd.messagesystem.controller;
 
 import hhdd.messagesystem.bean.User;
 import hhdd.messagesystem.service.UserService;
+import hhdd.messagesystem.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     @Autowired
     private UserService service;
+    @Autowired
+    private UserServiceImpl userServiceImpl;
 
 //@RequestMapping("/find/{id}")
 //    public User findOneById(@PathVariable(value = "id")int id){
@@ -33,10 +36,10 @@ public class UserController {
         return user;
     }
 }
-@RequestMapping(value = "/register",method = RequestMethod.POST)
+@RequestMapping(value = "/register",method = RequestMethod.GET)
 public boolean register(String username,String password){
     System.out.println("==========来到注册的方法=========");
-    return service.register(username,password);
+    return userServiceImpl.register(username,password);
 }
 
 
